@@ -3,14 +3,43 @@
 
 O **CLComm** é um aplicativo com a visão de facilitar a comunicação para pessoas com deficiências visuais e auditivas. Ele permite a tradução de texto para a linguagem de sinais e captura de movimentos para facilitar a comunicação entre pessoas.
 
+#
+
+### Clonando o Projeto
+
+Se você quiser clonar o repositório do nosso projeto e testá-lo diretamente em seu ambiente, siga os passos abaixo:
+
+####  1. Clone o repositório em sua máquina:
+
+```bash
+git clone git@github.com:matxxs/NextGen.git
+```
+
+#### 2. Navegue até o diretório do projeto:
+```bash
+cd NextGen
+```
+
+#### 3. Instale as dependências necessárias:
+```bash
+npm install
+```
+#### 4. Execute o projeto:
+```bash
+npx expo start
+```
+Agora, você pode testar o projeto em um simulador ou dispositivo físico. O QR Code gerado será exibido no terminal ou no navegador, permitindo que você visualize a aplicação no Expo Go.
+
+
 ## Configuração do Projeto
 
 ### 1. Criação do Projeto
 
+Utilizamos o comando npx para iniciar o projeto, juntamente com um template em branco configurado com TypeScript, visando uma estrutura mais organizada e escalável para o desenvolvimento.
 
+Esse template em branco com suporte a TypeScript oferece uma base sólida para tipagem estática, permitindo um desenvolvimento mais fluido, seguro e fácil de manter.
 
-Para iniciar um novo projeto Expo com TypeScript, execute o comando abaixo:
-
+Comando utilizado:
 ```bash
 npx create-expo-app@latest --template blank-typescript
 ```
@@ -71,3 +100,5 @@ root
 - **pages**: Contém as páginas ou telas do aplicativo, como a tela de login, home, e outras.
 
 Essa estrutura modular facilita a organização do código, tornando mais simples adicionar novas funcionalidades e gerenciar as existentes.
+
+
