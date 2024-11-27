@@ -11,7 +11,7 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ route }) => {
 
   const sendMessage = () => {
     console.log(`Mensagem enviada: ${message}`);
-    setMessage(""); // Limpa o campo após enviar
+    setMessage("");
   };
 
   return (

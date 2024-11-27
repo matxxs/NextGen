@@ -1,31 +1,35 @@
-import React, { useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Animated } from 'react-native';
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Dimensions, Animated } from 'react-native';
 
-export default function AddContactScreen() {
-  const slideAnim = useRef(new Animated.Value(Dimensions.get('window').height)).current; // Inicializa a animação da posição
+export default function AddContactScreen({ navigation }: any) {
+  const slideAnim = React.useRef(new Animated.Value(Dimensions.get('window').height)).current;
 
-  useEffect(() => {
+  React.useEffect(() => {
     Animated.timing(slideAnim, {
-      toValue: 0, // Move a tela para a posição inicial (de baixo para cima)
-      duration: 300, // Duração da animação
-      useNativeDriver: true, // Usa o driver nativo para melhor performance
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true,
     }).start();
   }, [slideAnim]);
 
   return (
     <Animated.View style={[styles.container, { transform: [{ translateY: slideAnim }] }]}>
-      <Text style={styles.title}>Novo Contato</Text>
+      <Text style={styles.title}>Adicionar Contato</Text>
+      
+      {/* Botão para criar novo contato */}
       <TouchableOpacity
         style={styles.optionButton}
-        // onPress={() => navigation.navigate('CreateContact', { type: 'Grupo' })}
-      >
-        <Text style={styles.optionText}>Novo Grupo</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.optionButton}
-        // onPress={() => navigation.navigate('CreateContact', { type: 'Contato' })}
+        onPress={() => navigation.navigate('CreateContact')}
       >
         <Text style={styles.optionText}>Novo Contato</Text>
+      </TouchableOpacity>
+
+      {/* Botão para criar novo grupo */}
+      <TouchableOpacity
+        style={styles.optionButton}
+        onPress={() => navigation.navigate('CreateGroup')}  
+      >
+        <Text style={styles.optionText}>Novo Grupo</Text>
       </TouchableOpacity>
     </Animated.View>
   );
@@ -35,20 +39,31 @@ const styles = StyleSheet.create({
   container: {
     height: Dimensions.get('window').height * 0.9,
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: '#E3F2FD',
   },
   title: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 20,
+    color: '#0D47A1',
+    marginBottom: 25,
+    textAlign: 'center',
   },
   optionButton: {
     padding: 15,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#F5F5F5', 
     borderRadius: 10,
     marginBottom: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 2,
   },
   optionText: {
     fontSize: 16,
+    fontWeight: '500',
+    color: '#1565C0',
+    textAlign: 'center',
   },
 });
+
