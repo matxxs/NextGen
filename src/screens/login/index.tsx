@@ -23,45 +23,42 @@ const Login = ({ navigation }: any) => {
   const { setUser } = useAuth();
 
   const handleLogin = async () => {
-    navigation.replace('Home');
+    try {
+      const response = await fetch(
+        'https://localhost:7259/api/v1/authentication/sign-in',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username, password }),
+        }
+      );
 
+      if (!response.ok) {
+        throw new Error(`Erro no servidor: ${response.status} ${response.statusText}`);
+      }
 
-    // try {
-    //   const response = await fetch(
-    //     'http://26.51.47.37:80/api/v1/authentication/sign-in',
-    //     {
-    //       method: 'POST',
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //       },
-    //       body: JSON.stringify({ username, password }),
-    //     }
-    //   );
+      const data = await response.json();
 
-    //   if (!response.ok) {
-    //     throw new Error(`Erro no servidor: ${response.status} ${response.statusText}`);
-    //   }
+      if (data.isSuccess) {
+        setApiResponse({ message: data.message, isSuccess: true });
 
-    //   const data = await response.json();
+        setUser({
+          fullName: data.fullName,
+          userId: data.userId,
+        });
 
-    //   if (data.isSuccess) {
-    //     setApiResponse({ message: data.message, isSuccess: true });
-
-    //     setUser({
-    //       fullName: data.fullName,
-    //       userId: data.userId,
-    //     });
-
-    //     Alert.alert('Login bem-sucedido!', `Bem-vindo, ${data.fullName}`);
-    //     navigation.replace('Home'); // Redireciona para a tela "Home"
-    //   } else {
-    //     setApiResponse({ message: data.message, isSuccess: false });
-    //     Alert.alert('Erro no login', data.message || 'Falha ao autenticar. Verifique as credenciais.');
-    //   }
-    // } catch (error) {
-    //   setApiResponse({ message: 'Erro ao conectar com o servidor.', isSuccess: false });
-    //   Alert.alert('Erro', 'Não foi possível conectar ao servidor. Por favor, tente novamente mais tarde.');
-    // }
+        Alert.alert('Login bem-sucedido!', `Bem-vindo, ${data.fullName}`);
+        navigation.replace('Home'); // Redireciona para a tela "Home"
+      } else {
+        setApiResponse({ message: data.message, isSuccess: false });
+        Alert.alert('Erro no login', data.message || 'Falha ao autenticar. Verifique as credenciais.');
+      }
+    } catch (error) {
+      setApiResponse({ message: 'Erro ao conectar com o servidor.', isSuccess: false });
+      Alert.alert('Erro', 'Não foi possível conectar ao servidor. Por favor, tente novamente mais tarde.');
+    }
   };
 
   return (
