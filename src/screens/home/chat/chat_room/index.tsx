@@ -10,7 +10,7 @@ import { GetMessages } from "../../../../services/chatService";
 type ChatRoomProps = StackScreenProps<ChatStackParamList, "ChatRoom">;
 
 const ChatRoom: React.FC<ChatRoomProps> = ({ route }) => {
-  const { user } = useAuth();
+  const { user } = useAuth(); 
   const { chatId, chatName } = route.params;
   const [message, setMessage] = useState<string>("");
   const [messages, setMessages] = useState<any[]>([]);
@@ -25,7 +25,6 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ route }) => {
       try {
         const data = await GetMessages(chatId);
         setMessages(data);
-
       } catch (error) {
         console.error("Erro ao carregar mensagens:", error);
         Alert.alert("Erro", "Não foi possível carregar as mensagens.");
@@ -33,7 +32,6 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ route }) => {
     };
 
     fetchMessages();
-
   }, [chatId]);
 
   const sendMessage = async () => {
@@ -54,6 +52,7 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ route }) => {
 
       setMessage("");
 
+      // Atualiza a lista de mensagens
       const data = await GetMessages(chatId);
       setMessages(data);
     } catch (error) {
@@ -65,11 +64,20 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ route }) => {
     }
   };
 
-  const renderItem = ({ item }: { item: any }) => (
-    <View style={styles.messageContainer}>
-      <Text style={styles.messageText}>{item.content}</Text>
-    </View>
-  );
+  const renderItem = ({ item }: { item: any }) => {
+    const isCurrentUser = item.senderId === user.userId; // Verifica se o remetente é o usuário logado
+
+    return (
+      <View
+        style={[
+          styles.messageContainer,
+          isCurrentUser ? styles.currentUserMessage : styles.receivedMessage,
+        ]}
+      >
+        <Text style={styles.messageText}>{item.content}</Text>
+      </View>
+    );
+  };
 
   return (
     <View style={styles.container}>

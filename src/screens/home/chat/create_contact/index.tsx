@@ -14,11 +14,11 @@ export default function CreateContactScreen() {
     isSuccess: boolean;
   } | null>(null);
   
-  const [name, setName] = useState('');
-  const [displayName, setDisplayName] = useState('');
+  const [otherUsername, setName] = useState('');
+  const [customChatName, setDisplayName] = useState('');
 
   const fetchCreateChat = async () => {
-    if (!name || !displayName) {
+    if (!otherUsername || !customChatName) {
       Alert.alert('Erro', 'Por favor, preencha todos os campos.');
       return;
     }
@@ -29,7 +29,7 @@ export default function CreateContactScreen() {
     }
 
     try {
-      const data = await createPrivateChat(user.userId, name, displayName); 
+      const data = await createPrivateChat(user.username, otherUsername, customChatName); 
 
       if (data.isSuccess) {
         setApiResponse({ message: data.message, isSuccess: true });
@@ -52,13 +52,13 @@ export default function CreateContactScreen() {
       <TextInput
         style={styles.input}
         placeholder="Nome"
-        value={name}
+        value={otherUsername}
         onChangeText={setName}
       />
       <TextInput
         style={styles.input}
         placeholder="Nome de Exibição"
-        value={displayName}
+        value={customChatName}
         onChangeText={setDisplayName}
       />
 
