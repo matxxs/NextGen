@@ -1,5 +1,5 @@
 import { Dimensions, StyleSheet } from "react-native";
-import { themes } from "../../global/themes"
+import { themes } from "../../global/themes";
 
 const { width, height } = Dimensions.get('window');
 
@@ -8,52 +8,52 @@ export const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: themes.colors.bgScreen,
+        backgroundColor: '#ccffcc', // Fundo verde bem claro
         paddingHorizontal: 20, 
-      },
-      boxTop:{
+    },
+    boxTop: {
         height: height / 4,
         width: '100%',
         alignItems: 'center',
         justifyContent: 'flex-end'
-      },
-      title: {
+    },
+    title: {
         fontSize: width * 0.09, 
         fontFamily: 'Roboto',
         color: themes.colors.title,
         fontWeight: 'bold',
         marginBottom: 20
-      },
-      description: {
+    },
+    description: {
         padding: 10,
         maxWidth: width / 1.1,
         fontSize: width * 0.05, 
-        color: themes.colors.text ,
+        color: themes.colors.text,
         textAlign: 'center',
         fontWeight: '500',
-      },
-      boxMid:{
+    },
+    boxMid: {
         height: height / 3,
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
         gap: 20,
-      },
-      countryInputContainer: {
+    },
+    countryInputContainer: {
         width: '90%',
         height: height * 0.07,
         borderColor: themes.colors.border,
         borderWidth: 3,
         justifyContent: 'center',
-      },
-      modalSelector: {
-        backgroundColor: '#f0f0f0', // Cor de fundo desejada
-        borderWidth: 0,             // Remove a borda
+    },
+    modalSelector: {
+        backgroundColor: '#f0f0f0', 
+        borderWidth: 0,             
         padding: 10,
-        borderRadius: 5,            // Adiciona borda arredondada se quiser
+        borderRadius: 5,
         height: 50,
         justifyContent: 'center',
-      },
+    },
     countryPickerText: {
         textAlign: 'center',
         fontSize: width * 0.05,
@@ -61,7 +61,7 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: themes.colors.text_active,
     },
-      phoneInputContainer: {
+    phoneInputContainer: {
         width: '90%',
         height: height * 0.07,
         borderColor: themes.colors.border,
@@ -70,33 +70,33 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 10,
         marginBottom: 30,
-      },
-      regionalNumberContainer:{
+    },
+    regionalNumberContainer: {
         padding: 10,
         borderRightWidth: 3,
         borderRightColor: themes.colors.border,
-      },
-      regionalNumber:{
+    },
+    regionalNumber: {
         fontSize: width * 0.05, 
         fontFamily: 'Roboto',
         fontWeight: 'bold',
         color: themes.colors.text_active,
-      },
-      phoneInput: {
+    },
+    phoneInput: {
         flex: 1,
         fontSize: width * 0.05,
         fontFamily: 'Roboto',
         color: '#A6A6A6',
         textAlign: 'center',
-      },
-      boxBottom:{
+    },
+    boxBottom: {
         height: height / 4,
         alignItems: 'center',
-        justifyContent:  'center'
-      },
-      button: {
-        width: width * 0.25, 
-        height: width * 0.25, 
+        justifyContent: 'center'
+    },
+    button: {
+        width: width * 0.2, // Largura reduzida
+        height: width * 0.3, // Altura aumentada (espessura)
         backgroundColor: themes.colors.bg_bnt_act,
         justifyContent: 'center',
         alignItems: 'center',
@@ -105,40 +105,40 @@ export const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 3 },
         shadowOpacity: 0.3,
         shadowRadius: 5,
-      },
-      buttonIcon: {
+    },
+    buttonIcon: {
         fontSize: 40,
         fontFamily: 'Roboto',
         color: '#FFFFFF'
-      },
-      modalOverlay: {
+    },
+    modalOverlay: {
         flex: 1,
         backgroundColor: 'rgba(0,0,0,0.5)',
         justifyContent: 'center',
         alignItems: 'center',
-      },
-      modalContent: {
+    },
+    modalContent: {
         width: '80%',
         backgroundColor: '#fff',
         borderRadius: 10,
         padding: 20,
         alignItems: 'center',
-      },
-      modalTitle: {
+    },
+    modalTitle: {
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 20,
-      },
-      modalList: {
+    },
+    modalList: {
         height: 300,
         width: '100%',
-      },
-      modalItem: {
+    },
+    modalItem: {
         padding: 15,
         borderBottomWidth: 1,
         borderBottomColor: '#eee',
-      },
-      modalItemText: {
+    },
+    modalItemText: {
         fontSize: 16,
-      },
+    },
 });
