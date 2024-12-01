@@ -1,7 +1,7 @@
 
-export const createPrivateChat = async (userId: number, name: string, displayName: string) => {
+export const createPrivateChat = async (creatorUsername: string, otherUsername: string, customChatName: string) => {
     try {
-      const response = await fetch(`http://26.51.47.37/api/v1/chat/private/${userId}/${name}/${displayName}`, {
+      const response = await fetch(`http://26.51.47.37/api/v1/chat/private/${creatorUsername}/${otherUsername}/${customChatName}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

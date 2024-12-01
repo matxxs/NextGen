@@ -25,7 +25,7 @@ const Login = ({ navigation }: any) => {
   const handleLogin = async () => {
     try {
       const response = await fetch(
-        'https://localhost:7259/api/v1/authentication/sign-in',
+        'http://26.51.47.37/api/v1/authentication/sign-in',
         {
           method: 'POST',
           headers: {
@@ -45,11 +45,12 @@ const Login = ({ navigation }: any) => {
         setApiResponse({ message: data.message, isSuccess: true });
 
         setUser({
-          fullName: data.fullName,
           userId: data.userId,
+          username: data.username,
+          
         });
 
-        Alert.alert('Login bem-sucedido!', `Bem-vindo, ${data.fullName}`);
+        Alert.alert('Login bem-sucedido!', `Bem-vindo, ${data.username}`);
         navigation.replace('Home'); // Redireciona para a tela "Home"
       } else {
         setApiResponse({ message: data.message, isSuccess: false });

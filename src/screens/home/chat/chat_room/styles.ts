@@ -3,39 +3,41 @@ import { Dimensions, StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
     backgroundColor: "#fff",
   },
   chatContainer: {
     flex: 1,
-    marginBottom: 16,
-  },
-  text: {
-    fontSize: 16,
-    fontWeight: "500",
-    marginBottom: 8,
+    padding: 10,
   },
   inputContainer: {
     flexDirection: "row",
-    alignItems: "center",
+    padding: 10,
+    borderTopWidth: 1,
+    borderColor: "#ccc",
   },
   input: {
     flex: 1,
-    height: 40,
-    borderColor: "#ccc",
     borderWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 8,
-    marginRight: 8,
+    borderColor: "#ccc",
+    borderRadius: 4,
+    padding: 8,
+    marginRight: 10,
   },
   messageContainer: {
-    backgroundColor: "#f1f1f1",
-    padding: 10,
-    marginBottom: 8,
+    marginVertical: 5,
+    maxWidth: "75%",
     borderRadius: 8,
+    padding: 10,
+  },
+  currentUserMessage: {
+    alignSelf: "flex-end",
+    backgroundColor: "#DCF8C6", // Verde claro para mensagens enviadas pelo usuário logado
+  },
+  receivedMessage: {
+    alignSelf: "flex-start",
+    backgroundColor: "#E8E8E8", // Cinza claro para mensagens recebidas
   },
   messageText: {
-    fontSize: 14,
-    color: "#333",
+    fontSize: 16,
   },
 });
