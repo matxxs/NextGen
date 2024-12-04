@@ -7,66 +7,58 @@ import {
   Alert,
   StyleSheet,
 } from 'react-native';
-//import { styles } from './styles';
 import MessageComponent from '../../components/MessageComponent';
-import { useAuth } from '../../context/AuthContext';
 
-const Login = ({ navigation }: any) => {
+const CreateAccount = ({ navigation }: any) => {
   const [username, setUsername] = useState('');
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [apiResponse, setApiResponse] = useState<{
     message: string;
     isSuccess: boolean;
   } | null>(null);
 
-  // Hook para acessar e atualizar o contexto de autenticação
-  const { setUser } = useAuth();
-
-  const handleLogin = async () => {
+  const handleCreateAccount = async () => {
     try {
       const response = await fetch(
-        'http://26.51.47.37/api/v1/authentication/sign-in',
+        'http://26.51.47.37/api/v1/authentication/create',
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ username, password }),
+          body: JSON.stringify({ username, fullName, email, password }),
         }
       );
 
       if (!response.ok) {
-        throw new Error(`Erro no servidor: ${response.status} ${response.statusText}`);
+        throw new Error(
+          `Erro no servidor: ${response.status} ${response.statusText}`
+        );
       }
 
       const data = await response.json();
 
       if (data.isSuccess) {
         setApiResponse({ message: data.message, isSuccess: true });
-
-        setUser({
-          userId: data.userId,
-          username: data.username,
-          
-        });
-
-        Alert.alert('Login bem-sucedido!', `Bem-vindo, ${data.username}`);
-        navigation.replace('Home'); // Redireciona para a tela "Home"
+        Alert.alert('Conta criada com sucesso!', 'Você pode fazer login agora.');
+        navigation.replace('Login');
       } else {
         setApiResponse({ message: data.message, isSuccess: false });
-        Alert.alert('Erro no login', data.message || 'Falha ao autenticar. Verifique as credenciais.');
+        Alert.alert('Erro na criação de conta', data.message || 'Verifique os dados fornecidos.');
       }
     } catch (error) {
       setApiResponse({ message: 'Erro ao conectar com o servidor.', isSuccess: false });
-      Alert.alert('Erro', 'Não foi possível conectar ao servidor. Por favor, tente novamente mais tarde.');
+      Alert.alert('Erro', 'Não foi possível conectar ao servidor. Tente novamente mais tarde.');
     }
   };
 
-  const CreateAccount  = async () => { navigation.replace('CreateAccount')}
+  const handleLogin = async () => {navigation.replace('Login');}
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+      <Text style={styles.title}>Criar Conta</Text>
 
       <TextInput
         style={styles.input}
@@ -74,7 +66,19 @@ const Login = ({ navigation }: any) => {
         value={username}
         onChangeText={setUsername}
       />
-
+      <TextInput
+        style={styles.input}
+        placeholder="Nome Completo"
+        value={fullName}
+        onChangeText={setFullName}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        keyboardType="email-address"
+        value={email}
+        onChangeText={setEmail}
+      />
       <TextInput
         style={styles.input}
         placeholder="Senha"
@@ -83,13 +87,14 @@ const Login = ({ navigation }: any) => {
         onChangeText={setPassword}
       />
 
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Enviar</Text>
+      <TouchableOpacity style={styles.button} onPress={handleCreateAccount}>
+        <Text style={styles.buttonText}>Registrar</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={CreateAccount}>
-        <Text style={styles.buttonText}>Criar Conta</Text>
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
+
 
       {apiResponse && (
         <MessageComponent
@@ -135,26 +140,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
-  messageBox: {
-    marginTop: 20,
-    padding: 15,
-    borderRadius: 5,
-  },
-  successBox: {
-    backgroundColor: '#d4edda',
-    borderColor: '#c3e6cb',
-    borderWidth: 1,
-  },
-  errorBox: {
-    backgroundColor: '#f8d7da',
-    borderColor: '#f5c6cb',
-    borderWidth: 1,
-  },
-  messageText: {
-    color: '#155724',
-    fontSize: 16,
-    textAlign: 'center',
-  },
-});
+}); 
 
-export default Login;
+export default CreateAccount;
