@@ -106,10 +106,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 20,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#dfffd6', // Fundo verde claro
   },
   title: {
-    fontSize: 24,
+    fontSize: 40, // Aumentei o tamanho da fonte do título
     fontWeight: 'bold',
     marginBottom: 20,
     textAlign: 'center',
@@ -118,15 +118,15 @@ const styles = StyleSheet.create({
     height: 50,
     borderWidth: 1,
     borderColor: '#ccc',
-    borderRadius: 5,
+    borderRadius: 10, // Bordas arredondadas para as caixas de entrada
     marginBottom: 20,
     paddingHorizontal: 10,
     backgroundColor: '#fff',
   },
   button: {
     backgroundColor: '#007bff',
-    padding: 15,
-    borderRadius: 5,
+    paddingVertical: 20, // Aumenta a espessura do botão
+    paddingHorizontal: 10, // Mantém a largura ajustada
     alignItems: 'center',
     marginTop: 5
   },
@@ -156,5 +156,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+
 
 export default Login;
